@@ -1,0 +1,168 @@
+@mixin boxStyle {
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 0 1rem;
+
+  h3 {
+    margin: 1rem 0 0 0;
+    text-transform: uppercase;
+    font-size: 3rem;
+  }
+}
+@keyframes apparition {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@mixin liste_piece_etage($hauteur) {
+  .list_pieces {
+    cursor: pointer;
+    align-self: center;
+    width: 100%;
+    height: $hauteur;
+    margin-bottom: 1rem;
+    padding: 1rem;
+
+    overflow: auto;
+    background-color: #e8e8e8;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+
+    .piece {
+      animation: apparition 300ms ease-in-out;
+      background-color: rgb(255, 255, 255);
+      //background-color: rgb(36, 36, 36);
+      display: flex;
+      justify-content: space-between;
+      padding: 1.2rem;
+      align-items: center;
+      border: 2px solid transparent;
+      &:hover {
+        border: 2px solid black;
+      }
+
+      &.active {
+        // background-color: rebeccapurple;
+        border: 2px solid black;
+      }
+
+      border-radius: 4px;
+      h3 {
+        margin: 0;
+      }
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+.batiment {
+  padding: 0 1rem 1rem 1rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #e8e8e8;
+
+  color: rgb(36, 36, 36);
+  overflow: hidden;
+
+  .batiment_container1 {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+
+    .batiment_container1_nom {
+      flex: 1;
+      @include boxStyle;
+    }
+    .batiment_container1_etage {
+      display: flex;
+      // height: 100%;
+      overflow: hidden;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 2;
+      @include boxStyle;
+      h3 {
+        font-size: 1.4rem;
+      }
+      p {
+        color: rgb(8, 10, 43);
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      @include liste_piece_etage(auto);
+    }
+  }
+  .batiment_container2 {
+    overflow: hidden;
+    height: 100%;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .batiment_container2_etage_info {
+      display: flex;
+      overflow: hidden;
+      flex: 1;
+      gap: 1rem;
+
+      .nom_etage {
+        flex: 2;
+        @include boxStyle;
+      }
+      .nombre_piece {
+        flex: 1;
+        @include boxStyle;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .batiment_container2_piece {
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 2;
+      @include boxStyle;
+
+      h3 {
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+      p {
+        color: #ffff;
+        border-radius: 4px;
+        padding: 5px;
+      }
+      .occupé {
+        background-color: green;
+      }
+
+      .non-occupé {
+        background-color: red;
+      }
+
+      .undefined {
+        background-color: gray;
+      }
+      @include liste_piece_etage(100%);
+    }
+  }
+}
